@@ -5,14 +5,18 @@
 #include "Card.cpp"
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <ctime>
+#include <random>
 
 class pile {
 public: 
 	void handout(int players);
-	void shuffle(Value deck[]);
+	void shuffle(Value deck);
+	void createDeck();
 private:
-	std::vector<Value> pile;
-	Value deck[];
+	std::vector<int> buttsauce;
+	std::vector<int> deck;
 };
 
 class player {
@@ -42,6 +46,28 @@ private:
 };
 int main()
 {
+	pile fart;
+	fart.createDeck();
 	return 0;
 }
 
+void pile::createDeck()
+{
+	std::srand(time(NULL));
+	for(int i=0; i<52; i++)
+	{
+		pile::deck.push_back(Value(i%13));
+	}
+
+	/*for(int i=0; i<pile::deck.size(); i++)
+	{
+		std::cout << pile::deck.at(i) << std::endl;
+	}*/
+	
+	int i = std::rand();
+	std::random_shuffle(pile::deck.begin(), pile::deck.end(), i);
+	for(int i=0; i<pile::deck.size(); i++)
+	{
+		std::cout << pile::deck.at(i) << std::endl;
+	}
+}

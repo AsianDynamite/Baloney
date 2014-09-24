@@ -8,7 +8,7 @@
 
 #include "card.h"
 
-string Card::suitName (Suit s) {
+/*string Card::suitName (Suit s) {
 	switch(s) {
 		case clubs: return "Clubs";
 		case diamonds: return "Diamonds";
@@ -16,13 +16,13 @@ string Card::suitName (Suit s) {
 		case spades: return "Spades";
 		default: throw std::out_of_range("Suit value out of range");
 	}
-}
+}*/
 
 string Card::valueName (Value v) {
 	switch(v) {
 	case ace: return "Ace";
-	case deuce: return "Deuce";
-	case trey: return "Trey";
+	case two: return "Two";
+	case three: return "Three";
 	case four: return "Four";
 	case five: return "Five";
 	case six:  return "Six";
