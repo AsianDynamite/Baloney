@@ -1,7 +1,6 @@
 // Baloney.cpp : Defines the entry point for the console application.
 //
 
-//check the gate
 #include "Card.h"
 #include "Card.cpp"
 #include <iostream>
