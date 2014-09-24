@@ -63,9 +63,8 @@ void pile::createDeck()
 	{
 		std::cout << pile::deck.at(i) << std::endl;
 	}*/
-	
-	int i = std::rand();
-	std::random_shuffle(pile::deck.begin(), pile::deck.end(), i);
+
+	std::random_shuffle(pile::deck.begin(), pile::deck.end());
 	for(int i=0; i<pile::deck.size(); i++)
 	{
 		std::cout << pile::deck.at(i) << std::endl;
