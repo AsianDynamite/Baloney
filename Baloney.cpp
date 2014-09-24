@@ -11,11 +11,11 @@
 
 class pile {
 public: 
-	void handout(int players);
-	void shuffle(Value deck);
+	void deal(player, AI);
 	void createDeck();
+	std::vector<int> showTable();
 private:
-	std::vector<int> buttsauce;
+	std::vector<int> table;
 	std::vector<int> deck;
 };
 
@@ -24,6 +24,7 @@ public:
 	void displayHand();
 	void playGame();
 	void winGame();
+	std::vector<int> showHand();
 private:
 	std::vector<int> hand;
 };
@@ -38,6 +39,7 @@ private:
 
 class AI{
 public:
+	std::vector<int> showHand();
 	void baloney();
 	void playGame();
 	void winGame();
@@ -47,7 +49,11 @@ private:
 int main()
 {
 	pile fart;
+	player Bob;
+	AI Alison;
 	fart.createDeck();
+	fart.deal(Bob, Alison);
+	Bob.displayHand();
 	return 0;
 }
 
@@ -59,14 +65,48 @@ void pile::createDeck()
 		pile::deck.push_back(Value(i%13));
 	}
 
-	/*for(int i=0; i<pile::deck.size(); i++)
-	{
-		std::cout << pile::deck.at(i) << std::endl;
-	}*/
-
 	std::random_shuffle(pile::deck.begin(), pile::deck.end());
-	for(int i=0; i<pile::deck.size(); i++)
+}
+
+void pile::deal(player player, AI AI)
+{
+	for(int i=0; i<52; i++)
 	{
-		std::cout << pile::deck.at(i) << std::endl;
+		 if(i<20)
+		 {
+			player.player::showHand().push_back(deck.at(i));
+		 }
+		 else if(i>=20 && i<40)
+		 {
+			AI.AI::showHand().push_back(deck.at(i));
+		 }
+		 else
+		 {
+			table.push_back(deck.at(i));
+		 }
+	}
+	
+}
+
+void player::displayHand()
+{
+	for(int i=0; i<hand.size(); i++)
+	{
+		std::cout << hand.at(i) << "  ";
 	}
 }
+
+std::vector<int> player::showHand()
+{
+	return player::hand;
+};
+
+std::vector<int> AI::showHand()
+{
+	return AI::hand;
+};
+
+std::vector<int> pile::showTable()
+{
+	return pile::table;
+};
