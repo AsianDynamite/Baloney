@@ -23,8 +23,6 @@ public:
 	Suit getSuit() { return suit; }
 	Value getValue() { return faceValue; }
 	string suitName (Suit s);
-	string valueName (Value v);
-	string name() { return valueName (faceValue) + " of " + suitName(suit);}
 private:
 		Suit suit;
 		Value faceValue;

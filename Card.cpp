@@ -18,7 +18,7 @@
 	}
 }*/
 
-string Card::valueName (Value v) {
+string valueName (int v) {
 	switch(v) {
 	case ace: return "Ace";
 	case two: return "Two";

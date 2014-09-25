@@ -1,15 +1,15 @@
 // Baloney.cpp : Defines the entry point for the console application.
 //
 
-#include "Card.h"
-#include "Card.cpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <ctime>
 #include <random>
+#include <string>
 
-
+enum Suit {clubs, diamonds, hearts, spades};
+enum Value {ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king};
 
 class player {
 public: 
@@ -18,6 +18,8 @@ public:
 	void winGame();
 	void pushHand(int i);
 	std::vector<int> showHand();
+	std::string valueName(int i);
+	int checkHand(int i, game&); 
 private:
 	std::vector<int> hand;
 };
@@ -25,12 +27,14 @@ private:
 class game{
 public:
 	game();
-	void baloney();
-	Value handOutCards();
-	int seeCard();
 	void changeCard();
-	std::vector<int> showVec();
 	void pushVec(int i);
+	void baloney(player&, game&);
+	int seeCard();
+	int stringToVal(std::string);
+	Value handOutCards();
+	std::string valueName(int i);
+	std::vector<int> showVec();
 	~game();
 private:
 	Value playCard;
@@ -64,9 +68,10 @@ int main()
 	pile fart;
 	player Bob;
 	AI Alison;
-	fart.createDeck();
+	bubpip.baloney(Bob, bubpip);
+	/*fart.createDeck();
 	fart.deal(Bob, Alison);
-	Bob.displayHand();
+	Bob.displayHand();*/
 	return 0;
 }
 
@@ -104,13 +109,53 @@ void player::displayHand()
 {
 	for(int i=0; i<hand.size(); i++)
 	{
-		std::cout << hand.at(i) << "  ";
+		std::cout << valueName(hand.at(i)) << "  ";
 	}
 }
 
 int game::seeCard()
 {
 	return playCard;
+}
+
+std::string player::valueName(int i)
+{
+	switch(i) {
+	case ace: return "Ace";
+	case two: return "Two";
+	case three: return "Three";
+	case four: return "Four";
+	case five: return "Five";
+	case six:  return "Six";
+	case seven: return "Seven";
+	case eight: return "Eight";
+	case nine: return "Nine";
+	case ten: return "Ten";
+	case jack: return "Jack";
+	case queen: return "Queen";
+	case king: return "King";
+	default: throw std::out_of_range("Face value out of range");
+	}
+}
+
+std::string game::valueName(int i)
+{
+	switch(i) {
+	case ace: return "Ace";
+	case two: return "Two";
+	case three: return "Three";
+	case four: return "Four";
+	case five: return "Five";
+	case six:  return "Six";
+	case seven: return "Seven";
+	case eight: return "Eight";
+	case nine: return "Nine";
+	case ten: return "Ten";
+	case jack: return "Jack";
+	case queen: return "Queen";
+	case king: return "King";
+	default: throw std::out_of_range("Face value out of range");
+	}
 }
 
 void game::changeCard()
@@ -207,5 +252,100 @@ game::game()
 }
 game::~game()
 {	
+	
+}
+
+
+
+
+
+int game::stringToVal(std::string S)
+{
+	for(int i=0; i < S.size(); i++)
+	{
+		S[i] = toupper(S[i]);
+	}
+	if(S.compare("KING"))
+	{
+		return king;
+	}
+	else if(S.compare("QUEEN"))
+	{
+		return queen;
+	}
+	else if(S.compare("JACK"))
+	{
+		return jack;
+	}
+	else if(S.compare("TEN"))
+	{
+		return ten;
+	}
+	else if(S.compare("NINE"))
+	{
+		return nine;
+	}
+	else if(S.compare("EIGHT"))
+	{
+		return eight;
+	}
+	else if(S.compare("SEVEN"))
+	{
+		return seven;
+	}
+	else if(S.compare("SIX"))
+	{
+		return six;
+	}
+	else if(S.compare("FIVE"))
+	{
+		return five;
+	}
+	else if(S.compare("FOUR"))
+	{
+		return four;
+	}
+	else if(S.compare("THREE"))
+	{
+		return three;
+	}
+	else if(S.compare("TWO"))
+	{
+		return two;
+	}
+	else if(S.compare("ACE"))
+	{
+		return ace;
+	}
+	return 666;
+}
+
+int player::checkHand(int i, game& bubpip)
+{
+	
+	for(int j = 0; j< hand.size(); j++)
+		{
+			if( i == hand.at(j))
+				{
+					bubpip.pushVec(hand.at(j)); 
+					hand.erase(hand.begin()+j); 
+					return 57;
+				}
+
+		}
+
+	return 75; 
+}
+
+void game::baloney(player& player, game& bubpip)
+{
+	
+	std::string playerCard;
+	do
+	{
+		std::cout << "You have to play a " << valueName(playCard) << "." << " Only input strings!!!!";
+		player.displayHand();
+		std::cin >> playerCard;
+	}while ((stringToVal(playerCard) <= 0) || (stringToVal(playerCard) >= 12) && player.checkHand(stringToVal(playerCard), bubpip) != 57);
 	
 }
