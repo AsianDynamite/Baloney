@@ -24,13 +24,14 @@ private:
 
 class game{
 public:
-	game (Value playCard=two);
+	game();
 	void baloney();
 	Value handOutCards();
 	int seeCard();
 	void changeCard();
 	std::vector<int> showVec();
 	void pushVec(int i);
+	~game();
 private:
 	Value playCard;
 	std::vector<int> currentVec;
@@ -198,4 +199,13 @@ void AI::winGame()
 	{
 		std::cout << "You lose the game!";
 	}
+}
+
+game::game()
+{
+	playCard = two;
+}
+game::~game()
+{	
+	
 }
