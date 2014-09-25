@@ -24,7 +24,7 @@ private:
 
 class game{
 public:
-	game(Value playCard=two);
+	game (Value playCard=two);
 	void baloney();
 	Value handOutCards();
 	int seeCard();
@@ -161,7 +161,7 @@ void AI::playGame(game& bubpip)
 {
 	for(int i=0; i<hand.size(); i++)
 	{
-		if(hand.at(i) == bubpip.seeCard)
+		if(hand.at(i) == bubpip.seeCard())
 		{
 			bubpip.pushVec(hand.at(i));
 			hand.erase(hand.begin() + i);
